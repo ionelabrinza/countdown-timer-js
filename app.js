@@ -60,15 +60,24 @@ function getRemainingTime() {
     let days = t / oneDay;
     days = Math.floor(days);
     let hours = Math.floor((t % oneDay) / oneHour);
-    let minutes = Math.floor((t % oneHour / oneMinute))
-    let seconds = Math.floor((t % oneMinute) / 1000)
+    let minutes = Math.floor((t % oneHour / oneMinute));
+    let seconds = Math.floor((t % oneMinute) / 1000);
 
     //set values arrays
 
     const values = [days, hours, minutes, seconds];
 
+    function format(item) {
+        if (item < 10) {
+            return item = `0${item}`
+        }
+        return item
+    }
+
     items.forEach(function(item, index) {
-        item.innerHTML = values[index]
+        item.innerHTML = format(values[index]);
     });
 }
+// countdown
+let countdown = setInterval(getRemainingTime, 1000);
 getRemainingTime()
